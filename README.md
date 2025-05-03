@@ -1,12 +1,15 @@
-# Nom du Projet
+# Task Management
 
-Une description succincte et claire du projet.
+Ce projet est une API de gestion des utilisateurs et des tâches construite avec AdonisJS. Elle permet l'authentification par OTP, la gestion des utilisateurs, des tâches, des rôles et des permissions.
 
 ## 🚀 Fonctionnalités principales
-- Fonctionnalité 1
-- Fonctionnalité 2
-- Fonctionnalité 3
-- ...
+- Authentification via OTP
+- CRUD pour la gestion des utilisateurs
+- Assignation et gestion des tâches
+- Filtrage des tâches en retard
+- Gestion des rôles et des permissions
+- Gestion des groupes et des tags de tâches
+- Middleware de sécurité pour l'accès administrateur
 
 ## 📦 Installation
 
