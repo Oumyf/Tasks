@@ -57,10 +57,12 @@
     "@adonisjs/lucid": "^21.6.0",
     "@adonisjs/mail": "^9.2.2",
     "@vinejs/vine": "^3.0.0",
+    "axios": "^1.9.0",
     "luxon": "^3.6.1",
     "mysql2": "^3.14.1",
     "reflect-metadata": "^0.2.2",
-    "sqlite3": "^5.1.7"
+    "sqlite3": "^5.1.7",
+    "uniqid": "^5.4.0"
   },
   "hotHook": {
     "boundaries": [
