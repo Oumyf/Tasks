@@ -12,12 +12,12 @@ export class TaskService {
   constructor(protected taskAssignmentEmailService: TaskAssignmentEmailService) {}
 
 
-  public async createTask(data: any, auth: HttpContext['auth'], taskGroupId?: number)
+  public async createTask(data: any, taskGroupId?: number)
   {
-    const userId = auth.user?.id;
-    if (!userId) {
-      throw new Error("L'utilisateur n'est pas connecté");
-    }
+    // const userId = auth.user?.id;
+    // if (!userId) {
+    //   throw new Error("L'utilisateur n'est pas connecté");
+    // }
 
     const { files, ...taskData } = data;
 
@@ -28,7 +28,7 @@ export class TaskService {
     // Création de la tâche
     const task = await Task.create({
       ...validatedTaskData,
-      createdBy: userId,
+      // createdBy: userId,
       taskGroupId: taskGroupId ?? null,
       dateDebut: validatedTaskData.dateDebut ? DateTime.fromJSDate(validatedTaskData.dateDebut) : null,
       dateFin: validatedTaskData.dateFin ? DateTime.fromJSDate(validatedTaskData.dateFin) : null,
@@ -68,15 +68,15 @@ export class TaskService {
       .replace(/'/g, '')
       .replace(/ /g, '_');
   }
-  public async listTasks(auth: HttpContext['auth']) {
-    const userId = auth.user?.id
-    if (!userId) {
-      throw new Error("L'utilisateur n'est pas connecté")
-    }
+  public async listTasks() {
+    // const userId = auth.user?.id
+    // if (!userId) {
+    //   throw new Error("L'utilisateur n'est pas connecté")
+    // }
 
     // Récupérer toutes les tâches
     const tasks = await Task.query()
-      .where('createdBy', userId)
+      // .where('createdBy', userId)
       .whereNull('deletedAt')
 
     // Récupérer tous les fichiers pour ces tâches
@@ -92,11 +92,11 @@ export class TaskService {
 
     return tasks
   }
-  public async updateTask(taskId: number, data: any, auth: HttpContext['auth']) {
-    const userId = auth.user?.id;
-    if (!userId) {
-      throw new Error("L'utilisateur n'est pas connecté");
-    }
+  public async updateTask(taskId: number, data: any) {
+    // const userId = auth.user?.id;
+    // if (!userId) {
+    //   throw new Error("L'utilisateur n'est pas connecté");
+    // }
 
     const { files, ...taskData } = data;
 
@@ -104,7 +104,9 @@ export class TaskService {
       messagesProvider: taskMessagesProvider,
     });
 
-    const task = await Task.query().where('createdBy', userId).where('id', taskId).first();
+    const task = await Task.query()
+    // .where('createdBy', userId)
+    .where('id', taskId).first();
     if (!task) {
       throw new Error("La tâche n'existe pas ou ne vous appartient pas");
     }

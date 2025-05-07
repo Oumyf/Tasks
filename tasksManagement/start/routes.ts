@@ -4,6 +4,7 @@ import { middleware } from '#start/kernel';
 // Controllers
 import AuthController from '#controllers/auth_controller';
 import TaskController from "#controllers/tasks_controller";
+import TaskGroupController from "#controllers/task_groups_controller";
 import TaskUsersController from "#controllers/task_users_controller";
 import UserController from "#controllers/users_controller";
 
@@ -16,6 +17,9 @@ router.get('/', async () => {
 router
   .group(() => {
     router.post('/login', [AuthController, 'login']);
+    router.post('/loginWithToken', [AuthController, 'loginWithToken']);
+    router.post('/registerWithToken', [AuthController, 'registerWithToken']);
+    router.post('/register', [AuthController, 'register']);
     router.post('/confirmLogin', [AuthController, 'confirmLogin']);
   })
   .prefix('/auth');
@@ -50,6 +54,8 @@ router
         router.put('/change_task_group/:id', [TaskController, 'changeTaskGroup']);
         router.put('/update_progression/:id', [TaskController, 'updateProgression']);
         router.get('/getTasksInLate', [TaskController, 'getTasksInLate']);
+
+        router.get('/list_task_groups', [TaskGroupController, 'listGroupTask']);
 
         // Assignations des tâches aux utilisateurs
         router.post('/assign_task_to_user/:taskId/users/:userId', [TaskUsersController, 'assignTaskToUser']);
